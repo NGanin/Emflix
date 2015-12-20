@@ -1,0 +1,707 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:import schemaLocation="http://www.w3.org/2001/xml.xsd"
+        namespace="http://www.w3.org/XML/1998/namespace"/>
+
+    <xs:element name="mediaList" type="mediaListType">
+        <!--
+        <xs:unique name="uniqueID">
+            <xs:selector xpath="./movie | ./tvShow"/>
+            <xs:field xpath="@id"/>
+        </xs:unique>
+        -->
+    </xs:element>
+
+    <!-- Type definitions follow -->
+    <xs:complexType name="mediaListType">
+        <xs:sequence>
+            <xs:element name="media" type="mediaType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+
+    </xs:complexType>
+
+    <xs:complexType name="mediaType">
+        <xs:sequence>
+            <xs:element name="title" type="titleType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="director" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="creator" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="actor" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="genreWrap" type="genreWrapType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="summary" type="textType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="LCSpecialTopics" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="writer" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="screenplay" type="linkType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="language" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="year" type="xs:gYear" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="yearRange" type="yearRangeType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="callNumber" type="linkType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="coverArt" type="picType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="review" type="textType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+        <xs:attributeGroup ref="mediaAttributeGroup"/>
+    </xs:complexType>
+
+    <xs:attribute name="differentiator" type="xs:string"/>
+    <xs:attribute name="sort" type="xs:positiveInteger"/>
+
+    <xs:complexType name="personType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute ref="differentiator" use="optional"/>
+                <xs:attribute ref="sort" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+
+    </xs:complexType>
+
+    <xs:complexType name="linkType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="href" type="xs:anyURI" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="picType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="href" use="required">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:pattern value=".+\.jpg"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="textType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="writer" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="titleType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute ref="xml:lang"/>
+                <xs:attribute name="type" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="foreign"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute ref="differentiator" use="optional"/>
+                <xs:attribute ref="sort" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="yearRangeType">
+        <xs:sequence>
+            <xs:element name="yearBegin" type="xs:gYear" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="yearEnd" type="xs:gYear" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="genreWrapType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="genre" type="genreType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="subGenre" type="subGenreType" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="subSubGenre" type="subSubGenreType" minOccurs="0"
+                maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:simpleType name="genreType">
+        <xs:annotation>
+            <xs:documentation>This controlled list was pulled from
+                dvd.netflix.com/AllGenres</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <!--=============================== FILM GENRE ENUMERATION -->
+            <xs:enumeration value="Action and Adventure"/>
+            <xs:enumeration value="Anime and Animation"/>
+            <xs:enumeration value="Children and Family"/>
+            <xs:enumeration value="Classics"/>
+            <xs:enumeration value="Comedy"/>
+            <xs:enumeration value="Documentary"/>
+            <xs:enumeration value="Drama"/>
+            <xs:enumeration value="Faith and Spirituality"/>
+            <xs:enumeration value="Foreign"/>
+            <xs:enumeration value="Horror"/>
+            <xs:enumeration value="Independent"/>
+            <xs:enumeration value="LGBTQ"/>
+            <xs:enumeration value="Music and Musicals"/>
+            <xs:enumeration value="Romance"/>
+            <xs:enumeration value="Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Sports"/>
+            <xs:enumeration value="Special Interest"/>
+            <xs:enumeration value="Thrillers"/>
+            <!--=============================== TV GENRE ENUMERATION -->
+            <xs:enumeration value="Television"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="subGenreType">
+        <xs:annotation>
+            <xs:documentation>This controlled list was pulled from dvd.netflix.com/AllGenres. The
+                following edits have been made 1. All ampersands have been replaced by 'and' as that
+                character causes a headache in transformations. 2. All instances of 'Gay and
+                Lesbian' have been replaced by 'LGBTQ', 'Australia/New Zealand' replaced with
+                'Australia and New Zealand', 'United Kingdom' replaced with 'Ireland and the United
+                Kingdom', 'Rockumentaries' was replaced with 'Musical Documentaries' 3. Some
+                individual subGenres have been added to creation reciprocation (i.e. adding Action
+                Comedies to Comedies, whereas Netflix only has it under Action) 4. Completely
+                original subGenres or subSubGenres include: Switzerland</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <!--=============================== MOVIE SUBGENRE ENUMERATION ===============================-->
+            <!-- Enumeration for Action & Adventure -->
+
+            <xs:enumeration value="Action Classics"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Action Comedies"/>
+            <xs:enumeration value="Action Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Action Thrillers"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Adventure Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Adventures"/>
+            <xs:enumeration value="African-American Action"/>
+            <xs:enumeration value="Blaxploitation"/>
+            <xs:enumeration value="Comic Books and Superheroes"/>
+            <xs:enumeration value="Crime Action"/>
+            <xs:enumeration value="Deadly Disasters"/>
+            <xs:enumeration value="Espionage Action"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Family Adventures"/>
+            <xs:enumeration value="Foreign Action and Adventure"/>
+            <xs:enumeration value="Heist Films"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Indie Action"/>
+            <xs:enumeration value="Martial Arts"/>
+            <xs:enumeration value="Military and War Action"/>
+            <xs:enumeration value="Super Swashbucklers"/>
+            <xs:enumeration value="Westerns"/>
+
+            <!-- Enumeration for Anime and Animation -->
+
+            <xs:enumeration value="Animation for Grown-ups"/>
+            <xs:enumeration value="Anime"/>
+            <xs:enumeration value="Family Animation"/>
+
+            <!-- Enumeration for Children & Family -->
+
+            <xs:enumeration value="Animal Tales"/>
+            <xs:enumeration value="Book Characters"/>
+            <xs:enumeration value="Disney"/>
+            <xs:enumeration value="Family Adventures"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Family Animation"/>
+            <xs:enumeration value="Family Classics"/>
+            <xs:enumeration value="Family Comedies"/>
+            <xs:enumeration value="Family Dramas"/>
+            <xs:enumeration value="Family Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Teen Comedies"/>
+            <xs:enumeration value="Teen Dramas"/>
+
+            <!-- Enumeration for Classics -->
+
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Action Classics"/>
+            <xs:enumeration value="Classic Comedies"/>
+            <xs:enumeration value="Classic Dramas"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Classic Movie Musicals"/>
+            <xs:enumeration value="Classic Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Classic Thrillers"/>
+            <xs:enumeration value="Classic War Stories"/>
+            <xs:enumeration value="Classic Westerns"/>
+            <xs:enumeration value="Classic Epics"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Family Classics"/>
+            <xs:enumeration value="Film Noir"/>
+            <xs:enumeration value="Foreign Classics"/>
+            <!-- see subSubGenre below for FC   -->
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Horror Classics"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Indie Classics"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Romance Classics"/>
+            <xs:enumeration value="Silent Films"/>
+
+            <!-- Enumeration for Comedy -->
+
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Action Comedies"/>
+            <xs:enumeration value="African-American Comedies"/>
+            <!-- Made up for parellelism -->
+            <xs:enumeration value="Asian-American Comedies"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Classic Comedies"/>
+            <xs:enumeration value="Cult Comedies"/>
+            <xs:enumeration value="Dark Humor and Black Comedies"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Family Comedies"/>
+            <xs:enumeration value="Foreign Comedies"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Indie Comedies"/>
+            <xs:enumeration value="Late Night Comedies"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="LGBTQ Comedies"/>
+            <xs:enumeration value="Mockumentaries"/>
+            <xs:enumeration value="Political Comedies"/>
+            <xs:enumeration value="Romantic Comedies"/>
+            <xs:enumeration value="Screwball"/>
+            <xs:enumeration value="Showbiz Comedies"/>
+            <xs:enumeration value="Slapstick"/>
+            <xs:enumeration value="Spoofs and Satire"/>
+            <xs:enumeration value="Sports Comedies"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Teen Comedies"/>
+
+            <!-- Enumeration for Drama -->
+
+            <xs:enumeration value="African-American Dramas"/>
+            <!-- Made up for parellelism -->
+            <xs:enumeration value="Asian-American Dramas"/>
+            <xs:enumeration value="Classic Dramas"/>
+            <xs:enumeration value="Courtroom Dramas"/>
+            <xs:enumeration value="Crime Dramas"/>
+            <!-- see subSubGenre below for DBoRL  -->
+            <xs:enumeration value="Dramas Based on Real Life"/>
+            <!-- see subSubGenre below for DBotB  -->
+            <xs:enumeration value="Dramas Based on the Book"/>
+            <!-- made up to separate from Classic Epics -->
+            <xs:enumeration value="Epics"/>
+            <xs:enumeration value="Family Dramas"/>
+            <xs:enumeration value="Foreign Dramas"/>
+            <xs:enumeration value="Gambling Dramas"/>
+            <xs:enumeration value="Indie Dramas"/>
+            <xs:enumeration value="Latino/a Dramas"/>
+            <xs:enumeration value="LGBTQ Dramas"/>
+            <xs:enumeration value="Medical Dramas"/>
+            <xs:enumeration value="Military and War Dramas"/>
+            <!-- see subSubGenre below for PP -->
+            <xs:enumeration value="Period Pieces"/>
+            <xs:enumeration value="Political Dramas"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Religious and Spiritual Dramas"/>
+            <xs:enumeration value="Romantic Dramas"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Sci-Fi Dramas"/>
+            <xs:enumeration value="Showbiz Dramas"/>
+            <xs:enumeration value="Social Issue Dramas"/>
+            <xs:enumeration value="Sports Dramas"/>
+            <xs:enumeration value="Tearjerkers"/>
+            <xs:enumeration value="Teen Dramas"/>
+
+            <!-- Enumeration for Documentary -->
+
+            <xs:enumeration value="African-American Documentaries"/>
+            <xs:enumeration value="Biographical Documentaries"/>
+            <xs:enumeration value="Crime Documentaries"/>
+            <xs:enumeration value="Faith and Spirituality Documentaries"/>
+            <xs:enumeration value="Foreign Documentaries"/>
+            <xs:enumeration value="Historical Documentaries"/>
+            <xs:enumeration value="Indie Documentaries"/>
+            <xs:enumeration value="Military Documentaries"/>
+            <xs:enumeration value="Mockumentaries"/>
+            <xs:enumeration value="Musical Documentaries"/>
+            <xs:enumeration value="Political Documentaries"/>
+            <xs:enumeration value="Science and Nature Documentaries"/>
+            <xs:enumeration value="Social and Cultural Documentaries"/>
+            <xs:enumeration value="Sports Documentaries"/>
+
+            <!-- Enumeration for Faith and Spirituality -->
+
+            <xs:enumeration value="Faith and Spirituality Documentaries"/>
+            <!-- see subSubGenre below for enumeration of FaSFF -->
+            <xs:enumeration value="Faith and Spirituality Feature Films"/>
+            <xs:enumeration value="Judaica"/>
+
+            <!-- Enumeration for Foreign -->
+
+            <xs:enumeration value="Foreign Action and Adventure"/>
+            <xs:enumeration value="Foreign Art House"/>
+            <xs:enumeration value="Foreign Children and Family"/>
+            <xs:enumeration value="Foreign Classics"/>
+            <xs:enumeration value="Foreign Comedies"/>
+            <xs:enumeration value="Foreign Regions"/>
+            <!-- see subSubGenre below for enumeration of FR  -->
+            <xs:enumeration value="Foreign Documentaries"/>
+            <xs:enumeration value="Foreign Dramas"/>
+            <xs:enumeration value="Foreign LGBTQ"/>
+            <xs:enumeration value="Foreign Horror"/>
+            <!-- see subSubGenre below for enumeration of FH -->
+            <xs:enumeration value="Foreign Languages"/>
+            <!-- see subSubGenre below for enumeration of FL  -->
+            <xs:enumeration value="Foreign Musicals"/>
+            <xs:enumeration value="Foreign Romance"/>
+            <!-- see subSubGenre below for enumeration of FR -->
+            <xs:enumeration value="Foreign Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Foreign Thrillers"/>
+            <xs:enumeration value="Bollywood"/>
+
+            <!-- Enumeration for Horror -->
+
+            <xs:enumeration value="B-Movie Horror"/>
+            <xs:enumeration value="Creature Features"/>
+            <xs:enumeration value="Cult Horror"/>
+            <!-- see subSubGenre below for enumeration of FH -->
+            <xs:enumeration value="Foreign Horror"/>
+            <xs:enumeration value="Frankenstein"/>
+            <xs:enumeration value="Horror Classics"/>
+            <xs:enumeration value="Monsters"/>
+            <xs:enumeration value="Satanic Stories"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Sci-Fi Horror"/>
+            <xs:enumeration value="Slashers and Serial Killers"/>
+            <xs:enumeration value="Supernatural Horror"/>
+            <xs:enumeration value="Teen Screams"/>
+            <xs:enumeration value="Vampires"/>
+            <xs:enumeration value="Werewolves"/>
+            <xs:enumeration value="Zombies"/>
+
+            <!-- Enumeration for Independent -->
+
+            <xs:enumeration value="Experimental"/>
+            <xs:enumeration value="Foreign Art House"/>
+            <xs:enumeration value="Indie Action"/>
+            <xs:enumeration value="Indie Classics"/>
+            <xs:enumeration value="Indie Comedies"/>
+            <xs:enumeration value="Indie Documentaries"/>
+            <xs:enumeration value="Indie Dramas"/>
+            <xs:enumeration value="Indie LGBTQ"/>
+            <xs:enumeration value="Indie Romance"/>
+            <xs:enumeration value="Indie Suspense and Thriller"/>
+
+            <!-- Enumeration of LGBTQ -->
+
+            <xs:enumeration value="Foreign LGBTQ"/>
+            <xs:enumeration value="Gay"/>
+            <xs:enumeration value="Indie LGBTQ"/>
+            <xs:enumeration value="Lesbian"/>
+            <xs:enumeration value="LGBTQ Comedies"/>
+            <xs:enumeration value="LGBTQ Dramas"/>
+            <xs:enumeration value="LGBTQ Romance"/>
+            <!-- Made up for parellelism -->
+            <xs:enumeration value="Transgender"/>
+
+            <!-- Enumeration for Music and Musicals -->
+
+            <!-- see subSubGenre below for enumeration of CM -->
+            <xs:enumeration value="Classical Music"/>
+            <!-- see subSubGenre below for enumeration of CaWF -->
+            <xs:enumeration value="Country-and-Western and Folk"/>
+            <!-- see subSubGenre below for enumeration of Musicals -->
+            <xs:enumeration value="Musicals"/>
+            <xs:enumeration value="Musical Documentaries"/>
+            <!-- see subSubGenre below for enumeration of Rock and Pop -->
+            <xs:enumeration value="Rock and Pop"/>
+            <!-- see subSubGenre below for enumeration of Urban and Dance -->
+            <xs:enumeration value="Urban and Dance"/>
+
+            <!-- Enumeration of Romance -->
+
+            <!-- see subSubGenre below for enumeration of FR -->
+            <xs:enumeration value="Foreign Romance"/>
+            <xs:enumeration value="Indie Romance"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="LGBTQ Romance"/>
+            <xs:enumeration value="Romance Classics"/>
+            <xs:enumeration value="Romantic Comedies"/>
+            <xs:enumeration value="Romantic Dramas"/>
+            <xs:enumeration value="Steamy Romance"/>
+
+            <!-- Enumeration of Sci-Fi & Fantasy -->
+
+            <xs:enumeration value="Action Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Adventure Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Alien Sci-Fi"/>
+            <xs:enumeration value="Classic Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Family Sci-Fi and Fantasy"/>
+            <!-- Added for reciprocation -->
+            <xs:enumeration value="Fantasy"/>
+            <xs:enumeration value="Foreign Sci-Fi and Fantasy"/>
+            <xs:enumeration value="Sci-Fi Cult Classics"/>
+            <xs:enumeration value="Sci-Fi Dramas"/>
+            <xs:enumeration value="Sci-Fi Horror"/>
+            <xs:enumeration value="Sci-Fi Thrillers"/>
+
+            <!-- Enumeration of Special Interest -->
+
+            <!-- see subSubGenre below for enumeration of AandD -->
+            <xs:enumeration value="Art and Design"/>
+            <!-- see subSubGenre below for enumeration of Dance -->
+            <xs:enumeration value="Dance"/>
+            <!-- see subSubGenre below for enumeration of FandW -->
+            <xs:enumeration value="Food and Wine"/>
+            <!-- see subSubGenre below for enumeration of Mind and Body -->
+            <xs:enumeration value="Mind and Body"/>
+            <!-- see subSubGenre below for enumeration of Theater Arts -->
+            <xs:enumeration value="Theater Arts"/>
+
+            <!-- Enumeration of Sports -->
+
+            <xs:enumeration value="Baseball"/>
+            <xs:enumeration value="Basketball"/>
+            <xs:enumeration value="Football"/>
+            <!-- see subSubGenre below for enumeration of MABaW -->
+            <xs:enumeration value="Martial Arts, Boxing, and Wrestling"/>
+            <!-- see subSubGenre below for enumeration of OS -->
+            <xs:enumeration value="Other Sports"/>
+            <!-- see subSubGenre below for enumeration of SS -->
+            <xs:enumeration value="Sports Stories"/>
+            <xs:enumeration value="Women in Sports"/>
+
+            <!-- Enumeration of Thrillers -->
+
+            <xs:enumeration value="Action Thrillers"/>
+            <xs:enumeration value="Classic Thrillers"/>
+            <xs:enumeration value="Crime Thrillers"/>
+            <xs:enumeration value="Erotic Thrillers"/>
+            <xs:enumeration value="Espionage Thrillers"/>
+            <xs:enumeration value="Foreign Thrillers"/>
+            <xs:enumeration value="Indie Suspense and Thriller"/>
+            <xs:enumeration value="Mobster"/>
+            <xs:enumeration value="Mystery"/>
+            <xs:enumeration value="Political Thrillers"/>
+            <xs:enumeration value="Psychological Thrillers"/>
+            <xs:enumeration value="Sci-Fi Thrillers"/>
+            <xs:enumeration value="Supernatural Thrillers"/>
+            <xs:enumeration value="Suspense"/>
+
+            <!--=============================== TV SUBGENRE ENUMERATION ===============================-->
+
+            <xs:enumeration value="Anime Series"/>
+            <xs:enumeration value="Foreign TV"/>
+            <xs:enumeration value="LGBTQ TV"/>
+            <xs:enumeration value="TV Action and Adventure"/>
+            <xs:enumeration value="TV Classics"/>
+            <xs:enumeration value="TV Comedies"/>
+            <xs:enumeration value="TV Dramas"/>
+            <xs:enumeration value="TV Miniseries"/>
+            <xs:enumeration value="TV Mysteries"/>
+            <xs:enumeration value="TV Sci-Fi and Fantasy"/>
+            <xs:enumeration value="TV Variety and Talk Shows"/>
+            <xs:enumeration value="TV War and Politics"/>
+            <xs:enumeration value="TV Westerns"/>
+
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="subSubGenreType">
+        <xs:annotation>
+            <xs:documentation>This controlled list was pulled from
+                dvd.netflix.com/AllGenres</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+
+            <!--=============================== MOVIE SUBSUBGENRE ENUMERATION ===============================-->
+
+
+            <!-- Enumeration for Art and Design -->
+
+            <xs:enumeration value="Computer Animation"/>
+            <xs:enumeration value="Painting"/>
+            <xs:enumeration value="Photography"/>
+
+            <!-- Enumeration for Classical Music -->
+
+            <xs:enumeration value="Opera and Operetta"/>
+
+            <!-- Enumeration for Country-and-Western and Folk -->
+
+            <xs:enumeration value="American Folk and Bluegrass"/>
+            <xs:enumeration value="Classic Country-and-Western"/>
+
+            <!-- Enumeration for Dance -->
+
+            <xs:enumeration value="Ballet and Modern Dance"/>
+
+            <!-- Enumeration for Drama Based on Real Life -->
+
+            <xs:enumeration value="Biographies"/>
+
+            <!-- Enumeration for Drama Based on the Book -->
+
+            <xs:enumeration value="Dramas Based on Bestsellers"/>
+            <xs:enumeration value="Dramas Based on Classic Literature"/>
+            <xs:enumeration value="Dramas Based on Contemporary Literature"/>
+
+            <!-- Enumeration for Faith and Spirituality Feature Films -->
+
+            <xs:enumeration value="Religious and Mythic Epics"/>
+            <xs:enumeration value="Religious and Spiritual Dramas"/>
+
+            <!-- Enumeration for Food and Wine -->
+
+            <xs:enumeration value="Food Stories"/>
+
+            <!-- Enumeration for Foreign Classics -->
+
+            <xs:enumeration value="Foreign Classic Comedies"/>
+            <xs:enumeration value="Foreign Classic Dramas"/>
+            <xs:enumeration value="Foreign Silent Films"/>
+
+            <!-- Enumeration for Foreign Horror -->
+
+            <xs:enumeration value="Asian Horror"/>
+            <xs:enumeration value="Italian Horror"/>
+
+            <!-- Enumeration for Foreign Languages -->
+
+            <xs:enumeration value="Afrikaans"/>
+            <xs:enumeration value="Arabic"/>
+            <xs:enumeration value="Bambara"/>
+            <xs:enumeration value="Cantonese"/>
+            <xs:enumeration value="Danish"/>
+            <xs:enumeration value="Farsi"/>
+            <xs:enumeration value="French"/>
+            <xs:enumeration value="German"/>
+            <xs:enumeration value="Hebrew"/>
+            <xs:enumeration value="Hindi"/>
+            <xs:enumeration value="Hungarian"/>
+            <xs:enumeration value="Italian"/>
+            <xs:enumeration value="Japanese"/>
+            <xs:enumeration value="Korean"/>
+            <xs:enumeration value="Mandarin"/>
+            <xs:enumeration value="Mayan"/>
+            <xs:enumeration value="Other African Languages"/>
+            <xs:enumeration value="Other Asian Languages"/>
+            <xs:enumeration value="Other European Languages"/>
+            <xs:enumeration value="Portuguese"/>
+            <xs:enumeration value="Russian"/>
+            <xs:enumeration value="Spanish"/>
+            <xs:enumeration value="Swedish"/>
+            <xs:enumeration value="Thai"/>
+            <xs:enumeration value="Wolof"/>
+
+            <!-- Enumeration for Foreign Region -->
+
+            <xs:enumeration value="Oceania"/>
+            <xs:enumeration value="Asia, Eastern - China"/>
+            <xs:enumeration value="Europe, Northern - Denmark"/>
+            <xs:enumeration value="Europe, Western - France"/>
+            <xs:enumeration value="Europe, Western - Germany"/>
+            <xs:enumeration value="Asia, Eastern - Hong Kong"/>
+            <xs:enumeration value="Asia, Southern - India"/>
+            <xs:enumeration value="Europe, Northern - Ireland and the UK"/>
+            <xs:enumeration value="Europe, Southern - Italy"/>
+            <xs:enumeration value="Asia, Eastern - Japan"/>
+            <xs:enumeration value="Africa - Other"/>
+            <xs:enumeration value="North American and Caribbean Countries"/>
+            <xs:enumeration value="Asia - Other"/>
+            <xs:enumeration value="Asia, Southern - Other"/>
+            <xs:enumeration value="Asia, Eastern - Other"/>
+            <xs:enumeration value="Europe, Eastern - Other"/>
+            <xs:enumeration value="Europe - Other"/>
+            <xs:enumeration value="Europe, Western - Other"/>
+            <xs:enumeration value="Europe, Eastern - Russia"/>
+            <xs:enumeration value="Africa, Southern - South Africa"/>
+            <xs:enumeration value="South America"/>
+            <xs:enumeration value="Europe, Southern - Spain"/>
+            <xs:enumeration value="Europe, Northern - Sweden"/>
+            <xs:enumeration value="Africa, Western"/>
+
+
+            <!-- Enumeration for Foreign Romance -->
+
+            <xs:enumeration value="Foreign Steamy Romance"/>
+
+            <!-- Enumeration for Mind and Body -->
+
+            <xs:enumeration value="Style and Beauty"/>
+
+            <!-- Enumeration for Musicals -->
+
+            <xs:enumeration value="Classic Movie Musicals"/>
+            <xs:enumeration value="Contemporary Movie Musicals"/>
+            <xs:enumeration value="Contemporary Stage Musicals"/>
+            <xs:enumeration value="Foreign Musicals"/>
+            <xs:enumeration value="Show Tunes"/>
+
+            <!-- Enumeration for Other Sports -->
+
+            <!-- Enumeration for Period Pieces -->
+
+            <xs:enumeration value="Pre-20th Century Period Pieces"/>
+            <xs:enumeration value="20th Century Period Pieces"/>
+
+            <!-- Enumeration for Rock and Pop -->
+
+            <xs:enumeration value="Classic Rock"/>
+            <xs:enumeration value="Pop"/>
+            <xs:enumeration value="Punk Rock"/>
+            <xs:enumeration value="Rock and Roll Oldies"/>
+            <xs:enumeration value="Singer-Songwriters"/>
+            <xs:enumeration value="Modern and Alternative Rock"/>
+
+            <!-- Enumeration for Sports Stories -->
+
+            <xs:enumeration value="Sports Comedies"/>
+            <xs:enumeration value="Sports Documentaries"/>
+            <xs:enumeration value="Sports Dramas"/>
+
+            <!-- Enumeration for Theater Arts -->
+
+            <xs:enumeration value="Contemporary Stage Musicals"/>
+            <xs:enumeration value="Shakespeare"/>
+            <xs:enumeration value="Theatrical Performances"/>
+            <xs:enumeration value="Opera and Operetta"/>
+
+            <!-- Enumeration for Urban and Dance -->
+
+            <xs:enumeration value="Classic Rhythm-and-Blues and Soul"/>
+
+            <!--=============================== TV SUBSUBGENRE ENUMERATION ===============================-->
+
+
+            <!-- Enumeration of Foreign TV -->
+
+            <xs:enumeration value="Foreign TV Dramas"/>
+            <xs:enumeration value="Foreign TV Comedies"/>
+
+            <!-- Enumeration of TV Classics -->
+
+            <xs:enumeration value="Classic TV Comedies"/>
+            <xs:enumeration value="Classic TV Dramas"/>
+            <xs:enumeration value="Classic TV Sci-Fi and Fantasy"/>
+
+            <!-- Enumeration of TV Comedies -->
+
+            <xs:enumeration value="TV Animated Comedies"/>
+            <xs:enumeration value="TV Sitcoms"/>
+            <xs:enumeration value="TV Sketch Comedies"/>
+
+            <!-- Enumeration of TV Dramas -->
+
+            <xs:enumeration value="TV Courtroom Dramas"/>
+            <xs:enumeration value="TV Crime Dramas"/>
+            <xs:enumeration value="TV Dramedy"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:attributeGroup name="mediaAttributeGroup">
+        <xs:annotation>
+            <xs:documentation> Media attributes which can be applied to any movie or tvShow element.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+        <xs:attribute name="dateCreated" type="xs:date" use="required"/>
+        <xs:attribute name="lastModified" type="xs:date" use="optional"/>
+        <xs:attribute name="boxSet" type="xs:boolean" use="optional"/>
+        <xs:attribute name="checkScript" type="xs:boolean" use="optional"/>
+    </xs:attributeGroup>
+
+</xs:schema>
