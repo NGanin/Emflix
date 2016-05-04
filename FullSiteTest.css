@@ -1,0 +1,1508 @@
+@charset "utf-8";
+
+/* http://meyerweb.com/eric/tools/css/reset/ */
+/* v1.0 | 20080212 */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+font,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+body{
+    line-height:1;
+}
+ol,
+ul{
+    list-style:none;
+}
+blockquote,
+q{
+    quotes:none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after{
+    content:'';
+    content:none;
+}
+ins{
+    text-decoration:none;
+}
+del{
+    text-decoration:line-through;
+}
+table{
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+menu,
+nav,
+section{
+    display:block;
+}
+
+/* apply a natural box layout model to all elements, but allowing components to change */
+
+html{
+    -webkit-box-sizing:border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing:border-box; /* Firefox, other Gecko */
+    box-sizing:border-box;
+}
+*,
+*:before,
+*:after{
+    -webkit-box-sizing:inherit; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing:inherit; /* Firefox, other Gecko */
+    box-sizing:inherit;
+}
+
+/*************************************************************************************************************************************
+
+                                                        SETS THE BODY STYLE AND COLOR
+
+
+**************************************************************************************************************************************/
+
+body{
+    background-color:#ebebeb;
+    font:normal 100% Arial, Helvetica, sans-serif;
+}
+
+/*************************************************************************************************************************************
+
+                                                        SETS THE HEADER SIZE AND SHAPE
+
+
+**************************************************************************************************************************************/
+
+header{
+    background-color: rgb(250, 250, 250); /* The Fallback */
+    background-color:rgba(250, 250, 250, 0.972549); /*the almost white head with almost opacity*/
+    border:1px solid rgb(180, 180, 180); /*grey ish*/
+    top:0;
+    height:90px;
+    width:100%;
+    position:fixed;
+    z-index:100;
+}
+
+
+/*************************************************************************************************************************************
+
+                                                        SETS THE NAV SIZE AND SHAPE
+
+
+**************************************************************************************************************************************/
+.linkWrapper,
+.logo {
+    float:left;
+    margin-left:15px;
+
+}
+
+.linkWrapper .onclick-menu{
+    border:none;
+    background:none;
+    font-size:1em;
+    font-weight:bold;
+    margin-top:31px;
+    cursor:pointer;
+}
+
+.linkWrapper{
+    width:40%;    
+}
+
+.linkWrapper li{
+    float:left;
+    margin-right:15px;
+}
+
+.navLink{
+    margin-top:34px;
+    cursor:pointer;
+}
+
+.search{
+    margin-top:25px;
+    float:right;
+    margin-right:40px;
+}
+
+
+a{
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.logo{
+    margin-top:12px;
+    font-family:'Oswald', sans-serif;
+    margin-left:40px;
+    font-size:2.5em;
+    letter-spacing:.125em;
+}
+
+.logo a,
+.navLink a:hover,
+.linkWrapper .onclick-menu{
+    color:#e50914; /*Netflix red*/
+}
+
+.navLink a{
+    color:#6b6765; /*Netflix grey*/
+    font-size:1em;
+}
+
+.search input{
+    background-color:#ededed;
+    height:35px;
+    border:1px solid #e50914; /*Netflix red*/
+    width:260px;
+}
+
+input[placeholder]:focus::-webkit-input-placeholder {
+    -moz-transition:opacity .5s .5s ease;
+    -webkit-transition:opacity .5s .5s ease;
+    -o-transition:opacity .5s .5s ease;
+    transition:opacity .5s .5s ease;
+    opacity:0;
+}
+
+.map {
+    -moz-column-count: 4;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 4;
+    -webkit-column-gap: 20px;
+    column-count: 4;
+    column-gap: 20px;
+}
+
+.map a:visited {
+  color:#0000EE;
+}
+
+
+/* Second Level */
+.map ul{
+  margin-left:20px;
+}
+
+/* Third Level */
+.map ul ul{
+  margin-left:30px;
+}
+
+
+/*************************************************************************************************************************************
+
+                                                      DROP DOWN STYLES
+
+
+**************************************************************************************************************************************/
+
+.linkWrapper button:focus{
+    /* clicking on label should toggle the menu */
+    pointer-events:none;
+    outline:none;
+}
+
+.linkWrapper button:focus + .omcOne{
+    /*  opacity is 1 in opened state (see below) */
+    opacity:1;
+    visibility:visible;
+
+    /* don't let pointer-events affect descendant elements */
+    pointer-events:auto;
+    overflow:auto;
+}
+
+
+.linkWrapper .omcOne{
+    position:absolute;
+    opacity:0;
+    visibility:hidden;
+    transition:visibility .5s;
+    -o-transition:visibility .5s;
+    -webkit-transition:visibility .5s;
+    -moz-transition:visibility .5s;
+    background-color:white;
+    width:auto;
+    margin-top:19px;
+    padding:15px 20px 7px 0;
+    border:1px solid black;
+}
+
+/* arrow for the expanding part 
+.linkWrapper .omcOne:before{
+    content:"";
+    width:0;
+    height:0;
+
+    border-bottom:10px solid white;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+
+    position:absolute;
+    top:-10px;
+} */
+
+.col{
+    float:left;
+    position:relative;
+    width:auto;
+    margin-left:20px;
+}
+
+
+.col li{
+    float:none;
+    width:100%;
+}
+
+.col li a{
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:25px;
+    font-size:14px;
+    color:black;
+}
+
+.col li a:hover{
+    color:#e50914; /*Netflix red*/
+    text-decoration:none;
+}
+
+/*************************************************************************************************************************************
+
+                                                        SETS THE INNER STYLE
+
+
+**************************************************************************************************************************************/
+
+#inner{
+    margin-top:120px;
+    margin-left:60px;
+}
+
+/*************************************************************************************************************************************
+
+                                                        SETS THE SUBHEADER AND SECOND DROP DOWN
+
+
+**************************************************************************************************************************************/
+
+
+.subheader{
+    margin-top:125px;
+}
+
+.subheader h1{
+    font-size:2.5em;
+}
+
+.subheader h2{
+    font-size:1.5em;
+    margin-left:-20px;
+}
+
+.subheader h3{
+    font-size:1em;
+    margin-left:-40px;
+}
+
+.subheader h2 a:link, .subheader h3 a:link, .subheader h2 a:visited, .subheader h3 a:visited{
+        color:black;
+}
+
+.subheader h2 a:hover{
+    color:#e50914; /*Netflix red*/
+    text-decoration:underline;
+    }
+    
+.subheader h3 a:hover{
+    color:#e50914; /*Netflix red*/
+    text-decoration:underline;
+    }
+
+.subheader h1,
+.subheader button{
+    color:#333333;
+    float:left;
+    margin-right:20px;
+    margin-bottom:18px;
+}
+
+.subheader button{
+    position:relative;
+    margin-top:10px;
+    width:130px;
+    font-size:15px;
+    font-weight:bold;
+    height:30px;
+    padding:2px 10px 2px 0;
+    vertical-align:top;
+    border:1px solid #adadad;
+    border-radius:3px;
+    background:#f2f2f2;
+}
+
+
+.arrow{
+    width:0;
+    height:0;
+    border-style:solid;
+    border-width:8px 5.5px 0 5.5px;
+    border-color:#4d4d4d transparent transparent transparent;
+    position:absolute;
+    top:12px;
+    right:10px;
+    margin-left:10%;
+}
+
+
+hr{
+    clear:left;
+}
+
+.subheader button:focus{
+    /* clicking on label should toggle the menu */
+    pointer-events:none;
+    outline:none;
+}
+
+.subheader button:focus + .onclick-menu-content{
+    /*  opacity is 1 in opened state (see below) */
+    opacity:1;
+    visibility:visible;
+
+    /* don't let pointer-events affect descendant elements */
+    pointer-events:auto;
+}
+
+.subheader button:hover{
+    background:#d1d1d1;
+}
+
+.subheader .onclick-menu-content{
+    position:absolute;
+    z-index:10;
+    opacity:0;
+    visibility:hidden;
+    -o-transition:visibility .5s;
+    transition:visibility .5s;
+    -webkit-transition:visibility .5s;
+    -moz-transition:visibility .5s;
+    background-color:white;
+    width:auto;
+    margin-top:55px;
+    margin-left:110px;
+    padding:10px;
+    border:1px solid black;
+}
+
+/* arrow for the expanding part 
+.subheader .onclick-menu-content:before{
+    content:"";
+    width:0;
+    height:0;
+
+    border-bottom:10px solid white;
+    border-left:10px solid transparent;
+    border-right:10px solid transparent;
+
+    position:absolute;
+    top:-10px;
+} */
+
+/*************************************************************************************************************************************
+
+                                                        MOVIE STYLEZ
+
+
+*****************************************************************************************************************************************/
+
+.box {
+    float:left;
+    margin:15px 10px 15px 10px;
+    position:relative;
+}
+
+.box img {
+   width: 168px;
+   height: 238px;
+   border:1px solid black;
+   transition:opacity .25s linear;
+   -o-transition:opacity .25s linear;
+   -webkit-transition:opacity .25s linear;
+   -moz-transition:opacity .25s linear;
+}
+
+.box:hover img {
+  zoom:1;
+  filter: alpha(opacity=30);
+  opacity: 0.3;
+}
+
+/*************************************************************************************************************************************
+
+                                                        INDEX PAGE
+
+*****************************************************************************************************************************************/
+
+.welcome {
+width:60.66%;
+margin:5% 2%;
+float:left;
+background-color: rgb(250, 250, 250); /* The Fallback */
+background-color:rgba(250, 250, 250, 0.972549); /*the almost white head with almost opacity*/
+border: 2px solid black;
+-moz-border-radius: 20px;
+-webkit-border-radius: 20px;
+border-radius: 20px;
+-moz-box-shadow: 1px 1px 10px #000000;
+-webkit-box-shadow: 1px 1px 10px #000000;
+box-shadow: 1px 1px 10px #000000;
+}
+
+.welcome p{
+margin:1% 0 5% 0;
+padding:2%;
+font-size:1.5em;
+color:#333333; 
+}
+
+
+#container{
+    width:30.33%;
+    float:right;
+    margin: 5% 2%;
+}
+
+#slider {
+   background: #000;
+   border: 5px solid #eaeaea;
+   box-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+   height: 476px;
+   width: 336px;
+   overflow: visible;
+   position: relative;
+}
+
+#mask {
+   overflow: hidden;  
+   height: 466px;
+}
+
+#slider ul {
+   margin: 0;
+   padding: 0;
+   position: relative;
+}
+
+#slider li {
+   position: absolute;
+   top: -325px; /* Original Position - Outside of the Slider */
+}
+
+#slider li img {
+   width: 330px;  /* Width Image */
+   height: 466px; /* Height Image */
+}
+
+#slider li.firstanimation {
+   animation: cycle 25s linear infinite;
+   -webkit-animation: cycle 25s linear infinite;
+  -moz-animation: cycle 25s linear infinite;
+  -o-animation: cycle 25s linear infinite;
+}
+
+#slider li.secondanimation {
+   animation: cycletwo 25s linear infinite;
+   -webkit-animation: cycletwo 25s linear infinite;
+  -moz-animation: cycletwo 25s linear infinite;
+  -o-animation: cycletwo 25s linear infinite;
+}
+
+#slider li.thirdanimation {
+   animation: cyclethree 25s linear infinite;
+      -webkit-animation: cyclethree 25s linear infinite;
+  -moz-animation: cyclethree 25s linear infinite;
+  -o-animation: cyclethree 25s linear infinite;
+}
+
+#slider li.fourthanimation {
+   animation: cyclefour 25s linear infinite;
+      -webkit-animation: cyclefour 25s linear infinite;
+  -moz-animation: cyclefour 25s linear infinite;
+  -o-animation: cyclefour 25s linear infinite;
+}
+
+#slider li.fifthanimation {
+   animation: cyclefive 25s linear infinite;
+      -webkit-animation: cyclefive 25s linear infinite;
+  -moz-animation: cyclefive 25s linear infinite;
+  -o-animation: cyclefive 25s linear infinite;
+}
+
+@keyframes cycle {
+   0%  { top: 0px; } /* When you start the slide, the first image is already visible */
+   4%  { top: 0px; } /* Original Position */
+   16% { top: 0px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
+   20% { top: 325px; opacity: 0; z-index: 0; } /* From 16% to 20% = for 1 second exit image */
+   21% { top: -325px; opacity: 0; z-index: -1; } /* Return to Original Position */
+   92% { top: -325px; opacity: 0; z-index: 0; }
+   96% { top: -325px; opacity: 0; } /* From 96% to 100% = for 1 second enter image*/
+   100%{ top: 0px; opacity: 1; }
+}
+
+@keyframes cycletwo {
+   0%  { top: -325px; opacity: 0; } /* Original Position */
+   16% { top: -325px; opacity: 0; }/* Starts moving after 16% to this position */
+   20% { top: 0px; opacity: 1; }
+   24% { top: 0px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
+   36% { top: 0px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
+   40% { top: 325px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
+   41% { top: -325px; opacity: 0; z-index: -1; }   /* Return to Original Position */
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclethree {
+   0%  { top: -325px; opacity: 0; }
+   36% { top: -325px; opacity: 0; }
+   40% { top: 0px; opacity: 1; }
+   44% { top: 0px; opacity: 1; }
+   56% { top: 0px; opacity: 1; }
+   60% { top: 325px; opacity: 0; z-index: 0; }
+   61% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@keyframes cyclefour {
+   0%  { top: -325px; opacity: 0; }
+   56% { top: -325px; opacity: 0; }
+   60% { top: 0px; opacity: 1; }
+   64% { top: 0px; opacity: 1; }
+   76% { top: 0px; opacity: 1; z-index: 0; }
+   80% { top: 325px; opacity: 0; z-index: 0; }
+   81% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+@keyframes cyclefive {
+   0%  { top: -325px; opacity: 0; }
+   76% { top: -325px; opacity: 0; }
+   80% { top: 0px; opacity: 1; }
+   84% { top: 0px; opacity: 1; }
+   96% { top: 0px; opacity: 1; z-index: 0; }
+   100%{ top: 325px; opacity: 0; z-index: 0; }
+}
+
+@-webkit-keyframes cycle {
+   0%  { top: 0px; } /* When you start the slide, the first image is already visible */
+   4%  { top: 0px; } /* Original Position */
+   16% { top: 0px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
+   20% { top: 325px; opacity: 0; z-index: 0; } /* From 16% to 20% = for 1 second exit image */
+   21% { top: -325px; opacity: 0; z-index: -1; } /* Return to Original Position */
+   92% { top: -325px; opacity: 0; z-index: 0; }
+   96% { top: -325px; opacity: 0; } /* From 96% to 100% = for 1 second enter image*/
+   100%{ top: 0px; opacity: 1; }
+}
+
+@-webkit-keyframes cycletwo {
+   0%  { top: -325px; opacity: 0; } /* Original Position */
+   16% { top: -325px; opacity: 0; }/* Starts moving after 16% to this position */
+   20% { top: 0px; opacity: 1; }
+   24% { top: 0px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
+   36% { top: 0px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
+   40% { top: 325px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
+   41% { top: -325px; opacity: 0; z-index: -1; }   /* Return to Original Position */
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@-webkit-keyframes cyclethree {
+   0%  { top: -325px; opacity: 0; }
+   36% { top: -325px; opacity: 0; }
+   40% { top: 0px; opacity: 1; }
+   44% { top: 0px; opacity: 1; }
+   56% { top: 0px; opacity: 1; }
+   60% { top: 325px; opacity: 0; z-index: 0; }
+   61% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@-webkit-keyframes cyclefour {
+   0%  { top: -325px; opacity: 0; }
+   56% { top: -325px; opacity: 0; }
+   60% { top: 0px; opacity: 1; }
+   64% { top: 0px; opacity: 1; }
+   76% { top: 0px; opacity: 1; z-index: 0; }
+   80% { top: 325px; opacity: 0; z-index: 0; }
+   81% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+@-webkit-keyframes cyclefive {
+   0%  { top: -325px; opacity: 0; }
+   76% { top: -325px; opacity: 0; }
+   80% { top: 0px; opacity: 1; }
+   84% { top: 0px; opacity: 1; }
+   96% { top: 0px; opacity: 1; z-index: 0; }
+   100%{ top: 325px; opacity: 0; z-index: 0; }
+}
+
+@-moz-keyframes cycle {
+   0%  { top: 0px; } /* When you start the slide, the first image is already visible */
+   4%  { top: 0px; } /* Original Position */
+   16% { top: 0px; opacity:1; z-index:0; } /* From 4% to 16 % = for 3 seconds the image is visible */
+   20% { top: 325px; opacity: 0; z-index: 0; } /* From 16% to 20% = for 1 second exit image */
+   21% { top: -325px; opacity: 0; z-index: -1; } /* Return to Original Position */
+   92% { top: -325px; opacity: 0; z-index: 0; }
+   96% { top: -325px; opacity: 0; } /* From 96% to 100% = for 1 second enter image*/
+   100%{ top: 0px; opacity: 1; }
+}
+
+@-moz-keyframes cycletwo {
+   0%  { top: -325px; opacity: 0; } /* Original Position */
+   16% { top: -325px; opacity: 0; }/* Starts moving after 16% to this position */
+   20% { top: 0px; opacity: 1; }
+   24% { top: 0px; opacity: 1; }  /* From 20% to 24% = for 1 second enter image*/
+   36% { top: 0px; opacity: 1; z-index: 0; }   /* From 24% to 36 % = for 3 seconds the image is visible */
+   40% { top: 325px; opacity: 0; z-index: 0; } /* From 36% to 40% = for 1 second exit image */
+   41% { top: -325px; opacity: 0; z-index: -1; }   /* Return to Original Position */
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@-moz-keyframes cyclethree {
+   0%  { top: -325px; opacity: 0; }
+   36% { top: -325px; opacity: 0; }
+   40% { top: 0px; opacity: 1; }
+   44% { top: 0px; opacity: 1; }
+   56% { top: 0px; opacity: 1; }
+   60% { top: 325px; opacity: 0; z-index: 0; }
+   61% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+
+@-moz-keyframes cyclefour {
+   0%  { top: -325px; opacity: 0; }
+   56% { top: -325px; opacity: 0; }
+   60% { top: 0px; opacity: 1; }
+   64% { top: 0px; opacity: 1; }
+   76% { top: 0px; opacity: 1; z-index: 0; }
+   80% { top: 325px; opacity: 0; z-index: 0; }
+   81% { top: -325px; opacity: 0; z-index: -1; }
+   100%{ top: -325px; opacity: 0; z-index: -1; }
+}
+@-moz-keyframes cyclefive {
+   0%  { top: -325px; opacity: 0; }
+   76% { top: -325px; opacity: 0; }
+   80% { top: 0px; opacity: 1; }
+   84% { top: 0px; opacity: 1; }
+   96% { top: 0px; opacity: 1; z-index: 0; }
+   100%{ top: 325px; opacity: 0; z-index: 0; }
+}
+
+/*************************************************************************************************************************************
+
+                                                        SEARCH PAGE
+
+*****************************************************************************************************************************************/
+
+.searchTerm {
+    color:black;
+}
+
+.searchError, .error {
+    background:#ffff99;
+    color:#e50914; /*Netflix red*/
+    border:1px solid #e50914; /*Netflix red*/
+    width:95%;
+    padding:1%;
+    margin:1% 0 2% 0;
+}
+
+.searchError p {
+    font-size:1.5em;
+}
+
+section {
+    margin-bottom:20px;
+} 
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/*************************************************************************************************************************************
+
+                                                        FEEDBACK PAGE
+
+*****************************************************************************************************************************************/
+
+
+*:focus {
+    outline: none;
+}
+
+.contact_form {
+    font-size:1em;
+    margin-bottom:100px;
+}
+.contact_form h2, .contact_form label {
+    font-family:Georgia, Times, "Times New Roman", serif;
+}
+.form_hint, .required_notification {
+    font-size: 11px;
+}
+
+.contact_form ul {
+    width:90%;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+.contact_form li{
+    padding:12px; 
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+
+.contact_form li:first-child, .contact_form li:last-child {
+    border-bottom:1px solid #777;
+}
+
+.contact_form h2 {
+    margin:0;
+    font-size:1.5em;
+    display: inline;
+}
+
+.required_notification {
+    margin:5px 0 0 0; 
+    display:inline;
+    float:right;
+}
+
+.asterisk {
+    color:#d45252;
+}
+
+.contact_form label {
+    width:150px;
+    float:left;
+    display:inline;
+    margin-top:-3px;
+    padding:3px;
+}
+
+/* Button Style */
+button.submit {
+    background-color: #68b12f;
+    background: linear-gradient(top, #68b12f, #50911e);
+    border: 1px solid #509111;
+    border-bottom: 1px solid #5b992b;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 0 0 #9fd574;
+    color: white;
+    font-weight: bold;
+    padding: 6px 20px;
+    text-align: center;
+    text-shadow: 0 -1px 0 #396715;
+}
+
+button.submit:hover {
+    opacity:.85;
+    cursor: pointer; 
+}
+
+button.submit:active {
+    border: 1px solid #20911e;
+    box-shadow: 0 0 10px 5px #356b0b inset;      
+}
+
+.contact_form input, .contact_form textarea {
+    width:200px;
+    border:1px solid black;
+}
+
+.contact_form textarea {
+    width:400px;
+}
+
+.contact_form input:focus, .contact_form textarea:focus {
+    width:240px;
+    transition:width .5s linear;
+    -o-transition:width .5s linear;
+    -webkit-transition:width .5s linear;
+    -moz-transition:width .5s linear;
+}
+
+.contact_form textarea:focus {
+    width:440px;
+}
+
+.contact_form input:focus:invalid, .contact_form textarea:focus:invalid { /* when a field is considered invalid by the browser */
+    box-shadow: 0 0 5px #d45252;
+    border-color: #b03535
+}
+
+.contact_form input:required:valid, .contact_form textarea:required:valid { /* when a field is considered valid by the browser */
+    box-shadow: 0 0 5px #5cd053;
+    border-color: #28921f;
+}
+
+.form_hint {
+    background: #d45252;
+    border-radius: 3px 3px 3px 3px;
+    color: white;
+    margin-left:8px;
+    padding: 1px 6px;
+    z-index: 999; /* hints stay above all other elements */
+    position: absolute; /* allows proper formatting if hint is two lines */
+    display: none;
+}
+
+.form_hint:before {
+    content: "\25C0"; /* left point triangle in escaped unicode */
+    color:#d45252;
+    position: absolute;
+    top:1px;
+    left:-6px;
+}
+
+
+.contact_form input:focus + .form_hint, .contact_form textarea:focus + .form_hint {
+    display: inline;
+}
+
+.contact_form input:required:valid + .form_hint {
+    display:none;
+}
+
+.contact_form input[type=file] {
+  color: black;
+  display:inline;
+}
+
+.contact_form input[type=file]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.contact_form input[type=file] {
+    padding-right:initial;
+    border:initial;
+}
+
+.contact_form input[type=file] {
+    padding-right:initial;
+    transition:initial;
+    -o-transition:initial;
+    -webkit-transition:initial;
+    -moz-transition:initial;
+}
+
+.contact_form input[type=file]::before {
+  content: 'Select file';
+  color: black;
+  display: inline-block;
+ background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select:none;
+  user-select:none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.contact_form input[type=file]:hover::before {
+  border-color: black;
+}
+.contact_form input[type=file]:active::before {
+  background:linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+.form_hint.permanent {
+    display:inline;
+}
+
+.contact_form input[type=file]:required:valid + .form_hint {
+    display:inline;
+}
+
+.contact_form input[type=file]:required:valid { /* when a field is considered valid by the browser */
+    box-shadow:initial;
+    border-color:initial;
+}
+
+
+
+
+
+
+/*************************************************************************************************************************************
+
+                                                        FAQ PAGE
+
+*****************************************************************************************************************************************/
+
+
+/*Add some spacing*/
+.faq-section{
+    margin: 20px 0;
+    position: relative;
+}
+
+/*Hide the paragraphs*/
+.faq-section p{
+    display: none;
+    width:50%;
+}   
+
+/*Hide the checkboxes */
+.faq-section input{
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;         
+    display: none;
+    margin: 0;          
+    width: 100%;
+    height: 36px;     
+}
+
+.faq-section label, .faq-section p {
+    margin-bottom:20px;
+}
+
+/*Show only the clipped intro */
+.faq-section label+p{
+    display: none;                        
+}
+
+/*If the checkbox is checked, show all paragraphs*/
+.faq-section input[type=checkbox]:checked~p{
+    display: block;
+    color: #444;
+    font-size: 1em;
+}
+
+/*Style the label*/
+.faq-section label{
+    font-size: 1.2em;
+    width:50%;
+    background: #eee;
+    display: block;
+    position: relative;
+    padding: 7px 10px;
+    font-weight: bold;
+    border: 1px solid #888;
+    border-left: 3px solid #888;
+    text-shadow: 0 1px 0 rgba(255,255,255,.5);
+    transition: all .15s ease-out;          
+}
+
+/*Remove text selection when toggle-ing*/
+.faq-section label:selection{
+    background: none;
+}
+
+.faq-section label:hover{
+    background: #ffffff;
+}
+
+/*If the checkbox is checked, style the label accordingly*/
+.faq-section input[type=checkbox]:checked~label{
+    border-color: #e50914; /*Netflix red*/          
+    background: white;           
+}
+
+/*Label's arrow - default state */
+.faq-section label::before{
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    margin-top: -6px;
+    border: 6px solid transparent;
+    border-left-color: inherit; 
+}
+
+/*Update the right arrow*/
+.faq-section input[type=checkbox]:checked~label::before{
+    border: 6px solid transparent;
+    border-top-color: inherit;
+    margin-top: -3px;
+    right: 10px;    
+}
+
+.faq a:link, .faq a:visited, .toolBody a:link,.toolBody a:visited  {
+    color:#0000EE;
+}
+
+.faq a:link:hover, .faq a:visited:hover, .toolBody a:link:hover,.toolBody a:visited:hover  {
+    color:#551A8B;
+    text-decoration:underline;
+}
+/*************************************************************************************************************************************
+
+                                                        TOOLTIP
+
+*****************************************************************************************************************************************/
+
+
+
+/*
+.tooltips {
+    display:none;
+}
+*/
+
+
+.tooltips {
+    position:absolute;
+    z-index:5000;
+    width:315px;
+    background:#FEFFFC;
+    text-align:left;
+    visibility:hidden;
+    opacity:0;
+    transition:opacity 0.25s linear;
+    -o-transition:opacity 0.25s linear;
+    -moz-transition:opacity 0.25s linear;
+    -webkit-transition:opacity 0.25s linear;
+    left:-40%;
+    bottom:25%;
+}
+
+button[name="review_title"] {
+    float:left;
+}
+
+button[name="report_error"] {
+    float:right;
+}
+
+.toolHeader button {
+    margin-top:10px;
+}
+
+.box:hover .tooltips {
+    visibility:visible;
+    opacity:1;       
+}
+
+.toolHeader {
+  padding:10px 10px 5px 10px;
+  width:100%;
+  min-height:60px;
+  border-bottom:1px solid black;
+  border-top:none;
+  background-color:#b9090b;
+  color:white;
+  z-index:10;
+  overflow: auto;
+  zoom: 1;
+}
+
+.toolHeader .foreign {
+    margin-top:5px;
+    font-style:italic;
+    font-size:.75em;
+}
+
+.toolBody {
+  position:absolute;
+  top:0;
+  left:0;
+  min-height:60px;
+  width:100%;
+  background-color:white;
+  color:black;
+  padding-bottom:10px;
+  border:1px solid black;
+  border-top:none;
+  -webkit-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 5px 0 rgba(0,0,0,0.75);
+
+}
+
+.toolBody .role {
+    font-weight:bold;
+} 
+
+.toolBody table {
+    margin-top:10px;
+    border-collapse:separate;
+    border-spacing:5px 5px;
+}
+
+.tooltips:after{
+    content:'';
+    position:absolute;
+    bottom:100%;
+    left:50%;
+    margin-left:-8px;
+    width:0;
+    height:0;
+    border-bottom:8px solid #b9090b;
+    border-right:8px solid transparent;
+    border-left:8px solid transparent;
+}
+
+
+/*************************************************************************************************************************************
+
+                                                        MEDIA QUERIES
+
+*****************************************************************************************************************************************/
+
+
+
+
+
+
+@media screen and (max-width:900px) {
+    
+    /* change position of browse dropdown to make it fit better on smaller screen*/
+header {
+    height:45px;
+    }
+    
+    
+.linkWrapper .omcOne{
+    left:10px;
+}
+
+.navLink,
+.linkWrapper .onclick-menu{
+    margin-top:10px;
+}
+
+.search{
+    margin-top:0;
+    position:absolute;
+    float:none;
+    right:2%;
+    top:5px;
+}
+
+.search input {
+    width:170px;
+}
+
+.logo{
+    margin-top:0;
+    font-size:2em;
+    letter-spacing:.125em;
+}
+
+.linkWrapper {
+    margin-right:0;
+    width:60%;
+}
+
+#inner{
+    margin-top:80px;
+    }
+
+.subheader{
+    margin-top:5px;
+}    
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)  {
+
+.linkWrapper button:hover {
+    pointer-events:none;
+    outline:none;
+    
+}
+
+.linkWrapper button:hover + .omcOne {
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+    overflow:auto;
+}
+
+.subheader button:hover {
+    pointer-events:none;
+    outline:none;
+}
+
+.subheader button:hover + .onclick-menu-content {
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+
+header {
+    height:90px;
+    }
+
+.search {
+    display:block;
+    position:absolute;
+    top:40px;
+    }
+
+.logo {
+    margin-top:5px;
+    margin-left:2%;
+    font-size:1.2em;
+}
+
+.linkWrapper {
+    width:70%;
+}
+
+.linkWrapper .omcOne{
+    left:0;
+}
+
+.linkWrapper .col{
+    float:left;
+    position:relative;
+    width:auto;
+    margin-left:2.5px;
+    margin-bottom:5px;
+}
+
+.linkWrapper .col:nth-of-type(2) {
+    border-left:1px solid black;
+    padding-left:5px;
+}
+
+.linkWrapper .col:nth-of-type(3) {
+      margin-right:14px;  
+      border-top:1px solid black;
+}
+
+.linkWrapper .col:last-of-type {
+      border-left:1px solid black;
+      border-top:1px solid black;
+      padding-left:5px;
+}
+
+.linkWrapper button:hover {
+    pointer-events:none;
+    outline:none;
+    
+}
+
+.linkWrapper button:hover + .omcOne {
+    visibility:visible;
+    opacity:1;
+    pointer-events:auto;
+    overflow:auto;
+}
+
+#inner {
+    margin-left:5px;
+    margin-top:100px;
+}
+
+.subheader h1{
+    font-size:1.5em;
+    font-size:5vw;
+}
+
+.subheader h2{
+    font-size:.7em;
+    font-size:4vw;
+    margin-left:0;
+}
+
+.subheader h3{
+    font-size:.4em;
+    font-size:3vw;
+    margin-left:0;
+}
+
+.subheader button{
+    margin-top:-5px;
+}
+
+.subheader button:hover{
+    pointer-events:none;
+    outline:none;
+}
+
+.subheader button:hover + .onclick-menu-content{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+}
+
+.subheader .onclick-menu-content{
+    position:absolute;
+    z-index:10;
+    width:auto;
+    left:-70px;
+    right:0;
+    margin-top:55px;
+}
+
+.box img {
+   width: 84px;
+   height: 119px;
+   }
+   
+#slider {
+   width: 168px;  /* Width Image */
+   height: 238px; /* Height Image */
+}
+
+#mask {
+   height: 238px; /* Height Image */
+}
+
+#slider li img {
+   width: 158px;  /* Width Image */
+   height: 228px; /* Height Image */
+}
+
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) 
+and (orientation : landscape) {
+    
+  .search {
+    display:block;
+    top:5px;
+    }
+    
+    header {
+    height:45px;
+    }
+    
+#inner {
+    margin-left:5px;
+    margin-top:80px;
+}
+    
+ .linkWrapper .col{
+    margin-left:0;
+    margin-bottom:0;
+}
+
+.linkWrapper .col:first-of-type {
+    margin-right:2.5px; 
+}
+
+.linkWrapper .col:nth-of-type(2) {
+    margin-right:2.5px; 
+    border-left:1px solid black;
+    padding-left:2.5px;
+}
+
+.linkWrapper .col:nth-of-type(3) {
+      margin-right:2.5px;  
+      padding-left:2.5px;
+      border-left:1px solid black;
+      border-top:initial;
+}
+
+.linkWrapper .col:last-of-type {
+      border-left:1px solid black;
+      border-top:initial;
+      padding-left:2.5px;
+}
+    
+}
+
+
+
+
+
